@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+	<p>{{lastname}} 家族成员</p>
+	<ul>
+		<li ng-repeat="x in names">{{x | uppercase | lowercase}}    {{lastname }}</li>
+	</ul>
+	<p>总价={{quantity*price | currency}}</p>
+	<p>{{17321265432 | date:"yyyy-MM-dd hh:mm:ss"}}</p>
+	<p>{{48461.5615 | number:'2'}}</p>
+	<p>{{19466.65 | currency:'RMB ￥'}}</p>
+	<p>{{myUrl}}</p>
+	<p>{{myHeader}}</p>
+	<p>{{theTime}}</p>
+	<br>
+	<button ng-click="toggle()">显示/隐藏</button>
+	<p ng-hide="myVar">
+		你好呀！
+	</p>
+</div>
+</body>
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript">
+	var app=angular.module('myApp',[]);
+	app.controller('myCtrl',function($scope,$rootScope,$location,$timeout,$interval){
+		$scope.names=["Emil", "Tobias", "Linus"];
+		$rootScope.lastname="Refsnes";
+		$scope.quantity="2";
+		$scope.price="9.99";
+		$scope.myUrl=$location.absUrl();
+		$scope.myHeader="hello world"
+		$timeout(function(){
+			$scope.myHeader="How are you today !"
+		},2000);
+		$scope.theTime=new Date().toLocaleTimeString();
+		$interval(function(){
+			$scope.theTime=new Date().toLocaleTimeString();
+		},1000);
+		$scope.myVar=false;
+		$scope.toggle=function(){
+			$scope.myVar=! $scope.myVar;
+		}
+	});
+</script>
+</html>

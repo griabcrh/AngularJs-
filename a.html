@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<style type="text/css">
+	input.ng-invalid{
+		background-color: lightblue;
+	}
+</style>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl" ng-init="names=[{name:'jine',country:'china'},{name:'marry',country:'American'}]">
+	姓：<input type="text" ng-model="firstname"><br/>
+	名：<input type="text" ng-model="lastname"><br/>
+	<br>
+	<h1>姓名： {{firstname+" "+lastname}}</h1>
+	<br>
+	<ul>
+		<li ng-repeat="x in names | orderBy:'country' ">{{x.name+ ', ' + x.country}}</li>
+		
+	</ul>
+	<br>
+	<div class="runoob-directive"></div>
+	<br>
+	<form name="myForm" ng-init="mtText='test@runoob.com'">
+		Email:
+		<input type="email" name="myAddress" ng-model="myText" required>
+		<span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+		<p>状态</p>
+		<p>Valid: {{myForm.myAddress.$valid}}</p>
+		<p>Dirty: {{myForm.myAddress.$dirty}}</p>
+		<p>Touched: {{myForm.myAddress.$touched}}</p>
+		<br>
+		输入你的名字:
+		<input type="text" name="myName" ng-model="myText" required>
+
+	</form>
+	<br>
+	<div ng-controller="myCtrl1">
+		<input type="text" ng-model="name1">
+		<h1>{{greeting}}</h1>
+		<button ng-click="sayHello()">点我</button>
+	</div>
+	<br>
+	<button ng-disabled="mySwitch" ng-init="mySwitch=true">按钮</button>
+	<p><input type="checkbox" ng-model="mySwitch">按钮</p>
+</div>
+<br>
+
+</body>
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript">
+	var app=angular.module('myApp',[]);
+	app.controller('myCtrl',function($scope){
+		$scope.firstname="cheng";
+		$scope.lastname="ruohong";
+	});
+	app.directive("runoobDirective",function(){
+		return {
+			restrict:"C",
+			template:"<h1>自定义指令！</h1>"
+		};
+	});
+	app.controller('myCtrl1',function($scope){
+		$scope.name1="cheng";
+		$scope.sayHello=function(){
+			$scope.greeting="hello  " + $scope.name1 + "!";
+		}
+	})
+</script>
+</html>
